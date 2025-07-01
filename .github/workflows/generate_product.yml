@@ -1,0 +1,17 @@
+name: Generate Digital Product
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p output
+          echo "# Digital Product $(date)" > output/product.md
+          echo "Automatically generated on $(date)" >> output/product.md
+      - uses: actions/upload-artifact@v3
+        with:
+          name: digital-product
+          path: output/
+
